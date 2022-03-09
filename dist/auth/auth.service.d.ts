@@ -1,7 +1,7 @@
 /// <reference types="mongoose" />
 import { ModelType } from '@typegoose/typegoose/lib/types';
-import { UserModel } from './auth.model';
 import { AuthDto } from './dto/auth.dto';
+import { UserModel } from './user.model';
 import { JwtService } from '@nestjs/jwt';
 export declare class AuthService {
     private readonly userModel;

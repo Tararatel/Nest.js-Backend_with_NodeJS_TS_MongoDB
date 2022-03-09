@@ -34,37 +34,45 @@ let ProductService = class ProductService {
         return this.productModel.findByIdAndUpdate(id, dto, { new: true }).exec();
     }
     async findWithReviews(dto) {
-        return this.productModel
-            .aggregate([
+        return this.productModel.aggregate([
             {
                 $match: {
-                    categories: dto.category,
-                },
+                    categories: dto.category
+                }
             },
             {
                 $sort: {
-                    _id: 1,
-                },
+                    _id: 1
+                }
             },
             {
-                $limit: dto.limit,
+                $limit: dto.limit
             },
             {
                 $lookup: {
                     from: 'Review',
                     localField: '_id',
                     foreignField: 'productId',
-                    as: 'reviews',
-                },
+                    as: 'reviews'
+                }
             },
             {
                 $addFields: {
                     reviewCount: { $size: '$reviews' },
                     reviewAvg: { $avg: '$reviews.rating' },
-                },
-            },
-        ])
-            .exec();
+                    reviews: {
+                        $function: {
+                            body: `function (reviews) {
+								reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+								return reviews;
+							}`,
+                            args: ['$reviews'],
+                            lang: 'js'
+                        }
+                    }
+                }
+            }
+        ]).exec();
     }
 };
 ProductService = __decorate([

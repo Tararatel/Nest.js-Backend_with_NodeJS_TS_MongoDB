@@ -14,6 +14,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductController = void 0;
 const common_1 = require("@nestjs/common");
+const jwt_guard_1 = require("../auth/guards/jwt.guard");
+const ad_validation_pipe_1 = require("../pipes/ad-validation.pipe");
 const create_product_dto_1 = require("./dto/create-product.dto");
 const find_product_dto_1 = require("./dto/find-product.dto");
 const product_constants_1 = require("./product.constants");
@@ -51,6 +53,7 @@ let ProductController = class ProductController {
     }
 };
 __decorate([
+    common_1.UseGuards(jwt_guard_1.JwtAuthGuard),
     common_1.Post('create'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -58,22 +61,25 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "create", null);
 __decorate([
+    common_1.UseGuards(jwt_guard_1.JwtAuthGuard),
     common_1.Get(':id'),
-    __param(0, common_1.Param('id')),
+    __param(0, common_1.Param('id', ad_validation_pipe_1.IdValidationPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "get", null);
 __decorate([
+    common_1.UseGuards(jwt_guard_1.JwtAuthGuard),
     common_1.Delete(':id'),
-    __param(0, common_1.Param('id')),
+    __param(0, common_1.Param('id', ad_validation_pipe_1.IdValidationPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ProductController.prototype, "delete", null);
 __decorate([
+    common_1.UseGuards(jwt_guard_1.JwtAuthGuard),
     common_1.Patch(':id'),
-    __param(0, common_1.Param('id')), __param(1, common_1.Body()),
+    __param(0, common_1.Param('id', ad_validation_pipe_1.IdValidationPipe)), __param(1, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, product_model_1.ProductModel]),
     __metadata("design:returntype", Promise)

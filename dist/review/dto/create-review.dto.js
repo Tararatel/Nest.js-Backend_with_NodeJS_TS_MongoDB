@@ -27,7 +27,7 @@ __decorate([
 ], CreateReviewDto.prototype, "description", void 0);
 __decorate([
     class_validator_1.Max(5),
-    class_validator_1.Min(1, { message: 'Рейтинг не может быть меньше 1' }),
+    class_validator_1.Min(1, { message: 'Рейтинг не может быть менее 1' }),
     class_validator_1.IsNumber(),
     __metadata("design:type", Number)
 ], CreateReviewDto.prototype, "rating", void 0);

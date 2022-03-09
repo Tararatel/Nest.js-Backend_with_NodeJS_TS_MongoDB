@@ -10,6 +10,7 @@ export declare class HhData {
     juniorSalary: number;
     middleSalary: number;
     seniorSalary: number;
+    updatedAt: Date;
 }
 export declare class TopPageAdvantage {
     title: string;
@@ -22,10 +23,12 @@ export declare class TopPageModel extends TimeStamps {
     secondCategory: string;
     alias: string;
     title: string;
+    metaTitle: string;
+    metaDescription: string;
     category: string;
     hh?: HhData;
-    advantages: TopPageAdvantage[];
-    seoText: string;
+    advantages?: TopPageAdvantage[];
+    seoText?: string;
     tagsTitle: string;
     tags: string[];
 }

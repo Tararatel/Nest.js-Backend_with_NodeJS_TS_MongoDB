@@ -15,11 +15,19 @@ const review_module_1 = require("./review/review.module");
 const config_1 = require("@nestjs/config");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
 const mongo_config_1 = require("./configs/mongo.config");
+const files_module_1 = require("./files/files.module");
+const telegram_module_1 = require("./telegram/telegram.module");
+const telegram_config_1 = require("./configs/telegram.config");
+const hh_module_1 = require("./hh/hh.module");
+const schedule_1 = require("@nestjs/schedule");
+const sitemap_module_1 = require("./sitemap/sitemap.module");
+const goto_module_1 = require("./goto/goto.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
         imports: [
+            schedule_1.ScheduleModule.forRoot(),
             config_1.ConfigModule.forRoot(),
             nestjs_typegoose_1.TypegooseModule.forRootAsync({
                 imports: [config_1.ConfigModule],
@@ -29,7 +37,16 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             top_page_module_1.TopPageModule,
             product_module_1.ProductModule,
-            review_module_1.ReviewModule
+            review_module_1.ReviewModule,
+            files_module_1.FilesModule,
+            telegram_module_1.TelegramModule.forRootAsync({
+                imports: [config_1.ConfigModule],
+                inject: [config_1.ConfigService],
+                useFactory: telegram_config_1.getTelegramConfig
+            }),
+            hh_module_1.HhModule,
+            sitemap_module_1.SitemapModule,
+            goto_module_1.GotoModule
         ]
     })
 ], AppModule);

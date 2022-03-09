@@ -8,8 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReviewModule = void 0;
 const common_1 = require("@nestjs/common");
-const review_controller_1 = require("./review.controller");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
+const telegram_module_1 = require("../telegram/telegram.module");
+const review_controller_1 = require("./review.controller");
 const review_model_1 = require("./review.model");
 const review_service_1 = require("./review.service");
 let ReviewModule = class ReviewModule {
@@ -22,12 +23,13 @@ ReviewModule = __decorate([
                 {
                     typegooseClass: review_model_1.ReviewModel,
                     schemaOptions: {
-                        collection: 'Review',
-                    },
-                },
+                        collection: 'Review'
+                    }
+                }
             ]),
+            telegram_module_1.TelegramModule
         ],
-        providers: [review_service_1.ReviewService],
+        providers: [review_service_1.ReviewService]
     })
 ], ReviewModule);
 exports.ReviewModule = ReviewModule;

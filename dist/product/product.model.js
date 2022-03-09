@@ -34,6 +34,14 @@ __decorate([
 ], ProductModel.prototype, "title", void 0);
 __decorate([
     typegoose_1.prop(),
+    __metadata("design:type", String)
+], ProductModel.prototype, "link", void 0);
+__decorate([
+    typegoose_1.prop(),
+    __metadata("design:type", Number)
+], ProductModel.prototype, "initialRating", void 0);
+__decorate([
+    typegoose_1.prop(),
     __metadata("design:type", Number)
 ], ProductModel.prototype, "price", void 0);
 __decorate([

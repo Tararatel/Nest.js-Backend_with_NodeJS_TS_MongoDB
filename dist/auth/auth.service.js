@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const nestjs_typegoose_1 = require("nestjs-typegoose");
-const auth_model_1 = require("./auth.model");
+const user_model_1 = require("./user.model");
 const bcryptjs_1 = require("bcryptjs");
 const auth_constants_1 = require("./auth.constants");
 const jwt_1 = require("@nestjs/jwt");
@@ -28,7 +28,7 @@ let AuthService = class AuthService {
         const salt = await bcryptjs_1.genSalt(10);
         const newUser = new this.userModel({
             email: dto.login,
-            passwordHash: await bcryptjs_1.hash(dto.password, salt),
+            passwordHash: await bcryptjs_1.hash(dto.password, salt)
         });
         return newUser.save();
     }
@@ -49,13 +49,13 @@ let AuthService = class AuthService {
     async login(email) {
         const payload = { email };
         return {
-            access_token: await this.jwtService.signAsync(payload),
+            access_token: await this.jwtService.signAsync(payload)
         };
     }
 };
 AuthService = __decorate([
     common_1.Injectable(),
-    __param(0, nestjs_typegoose_1.InjectModel(auth_model_1.UserModel)),
+    __param(0, nestjs_typegoose_1.InjectModel(user_model_1.UserModel)),
     __metadata("design:paramtypes", [Object, jwt_1.JwtService])
 ], AuthService);
 exports.AuthService = AuthService;

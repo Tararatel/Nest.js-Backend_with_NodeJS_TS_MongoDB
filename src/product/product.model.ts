@@ -9,13 +9,19 @@ class ProductCharacteristic {
 	value: string;
 }
 
-export interface ProductModel extends Base {}
+export interface ProductModel extends Base { }
 export class ProductModel extends TimeStamps {
 	@prop()
 	image: string;
 
 	@prop()
 	title: string;
+
+	@prop()
+	link: string;
+
+	@prop()
+	initialRating: number;
 
 	@prop()
 	price: number;
@@ -33,7 +39,7 @@ export class ProductModel extends TimeStamps {
 	advantages: string;
 
 	@prop()
-	disAdvantages: string;
+	disAdvantages?: string;
 
 	@prop({ type: () => [String] })
 	categories: string[];
